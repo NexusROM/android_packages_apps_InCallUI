@@ -89,6 +89,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private TextView mPhoneNumber;
     private TextView mNumberLabel;
     private TextView mPrimaryName;
+    private TextView mNumberLocation;
     private View mCallStateButton;
     private ImageView mCallStateIcon;
     private ImageView mCallStateVideoCallIcon;
@@ -115,6 +116,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     // Secondary caller info
     private View mSecondaryCallInfo;
     private TextView mSecondaryCallName;
+    private TextView mSecondaryCallLocation;
     private View mSecondaryCallProviderInfo;
     private TextView mSecondaryCallProviderLabel;
     private ImageView mSecondaryCallProviderIcon;
@@ -225,6 +227,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
         mPhoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
         mPrimaryName = (TextView) view.findViewById(R.id.name);
+        mNumberLocation = (TextView) view.findViewById(R.id.location);
         mNumberLabel = (TextView) view.findViewById(R.id.label);
         mSecondaryCallInfo = view.findViewById(R.id.secondary_call_info);
         mSecondaryCallProviderInfo = view.findViewById(R.id.secondary_call_provider_info);
@@ -491,8 +494,17 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     }
 
+    public void setPrimaryLocation(String location) {
+        if (!TextUtils.isEmpty(location)) {
+            mNumberLocation.setText(location);
+            mNumberLocation.setVisibility(View.VISIBLE);
+        } else {
+           mNumberLocation.setVisibility(View.GONE);
+        }
+    }
+
     @Override
-    public void setPrimary(String number, String name, boolean nameIsNumber, String label,
+    public void setPrimary(String number, String name, boolean nameIsNumber, String label, String location,
             Drawable photo, boolean isSipCall, boolean isForwarded) {
         Log.d(this, "Setting primary call");
 
@@ -510,13 +522,16 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // Set the label (Mobile, Work, etc)
         setPrimaryLabel(label);
 
+        // Set the Location
+        setPrimaryLocation(location);
+
         showCallTypeLabel(isSipCall, isForwarded);
 
         setDrawableToImageView(mPhoto, photo);
     }
 
     @Override
-    public void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
+    public void setSecondary(boolean show, String name, boolean nameIsNumber, String label, String location,
             String providerLabel, Drawable providerIcon, boolean isConference) {
 
         if (show != mSecondaryCallInfo.isShown()) {
@@ -530,6 +545,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mSecondaryCallConferenceCallIcon.setVisibility(isConference ? View.VISIBLE : View.GONE);
 
             mSecondaryCallName.setText(name);
+            
+
+            mSecondaryCallLocation.setText(location);
+   
             if (hasProvider) {
                 mSecondaryCallProviderLabel.setText(providerLabel);
                 mSecondaryCallProviderIcon.setImageDrawable(providerIcon);
@@ -792,6 +811,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         // until mSecondaryCallInfo is inflated in the call above.
         if (mSecondaryCallName == null) {
             mSecondaryCallName = (TextView) getView().findViewById(R.id.secondaryCallName);
+            mSecondaryCallLocation = (TextView) getView().findViewById(R.id.secondaryCallLocation);
             mSecondaryCallConferenceCallIcon =
                     getView().findViewById(R.id.secondaryCallConferenceCallIcon);
             if (hasProvider) {

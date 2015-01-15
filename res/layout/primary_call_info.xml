@@ -120,6 +120,13 @@
 
         </LinearLayout>
 
+        <TextView android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/incall_call_location_text_color"/>
+
         <!-- Elapsed time indication for a call in progress. -->
         <TextView android:id="@+id/elapsedTime"
             android:layout_width="wrap_content"

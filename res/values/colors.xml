@@ -17,6 +17,8 @@
 
 <resources>
 
+    <color name="incall_call_location_text_color">#FFFFFF</color> <!-- location text color -->
+
     <!-- In-call UI background color. -->
     <color name="incall_background_color">@color/dialer_theme_color</color>
     <color name="incall_accent_color">#ffffff</color>

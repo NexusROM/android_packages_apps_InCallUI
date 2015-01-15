@@ -55,7 +55,15 @@
 
             <!-- Name (or the phone number, if we don't have a name to display). -->
             <TextView android:id="@+id/secondaryCallName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/incall_banner_secondary_text_color"
+                android:textSize="@dimen/secondary_call_info_text_size"
+                android:ellipsize="marquee"
+                android:singleLine="true"/>
+
+            <TextView android:id="@+id/secondaryCallLocation"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/incall_banner_secondary_text_color"
                 android:textSize="@dimen/secondary_call_info_text_size"

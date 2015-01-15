@@ -496,7 +496,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (mPrimary == null) {
             // Clear the primary display info.
-            ui.setPrimary(null, null, false, null, null, false, false);
+            ui.setPrimary(null, null, false, null, null, null, false, false);
             return;
         }
 
@@ -509,6 +509,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getConferenceString(mPrimary),
                     false /* nameIsNumber */,
                     null /* label */,
+                    null /* location */,
                     getConferencePhoto(mPrimary),
                     false /* isSipCall */,
                     isForwarded);
@@ -523,12 +524,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     name,
                     nameIsNumber,
                     mPrimaryContactInfo.label,
+                    mPrimaryContactInfo.location,
                     mPrimaryContactInfo.photo,
                     mPrimaryContactInfo.isSipCall,
                     isForwarded);
         } else {
             // Clear the primary display info.
-            ui.setPrimary(null, null, false, null, null, false, false);
+            ui.setPrimary(null, null, false, null, null, null, false, false);
         }
     }
 
@@ -571,7 +573,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
 
         if (mSecondary == null) {
             // Clear the secondary display info.
-            ui.setSecondary(false, null, false, null, null, null, false /* isConference */);
+            ui.setSecondary(false, null, false, null, null, null, null, false /* isConference */);
             return;
         }
 
@@ -581,6 +583,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     getConferenceString(mSecondary),
                     false /* nameIsNumber */,
                     null /* label */,
+                    null /* location */,
                     getCallProviderLabel(mSecondary),
                     getCallProviderIcon(mSecondary),
                     true /* isConference */);
@@ -593,12 +596,13 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
                     name,
                     nameIsNumber,
                     mSecondaryContactInfo.label,
+                    mSecondaryContactInfo.location,
                     getCallProviderLabel(mSecondary),
                     getCallProviderIcon(mSecondary),
                     false /* isConference */);
         } else {
             // Clear the secondary display info.
-            ui.setSecondary(false, null, false, null, null, null, false /* isConference */);
+            ui.setSecondary(false, null, false, null, null, null, null, false /* isConference */);
         }
     }
 
@@ -720,7 +724,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         // If the name is empty, we use the number for the name...so dont show a second
         // number in the number field
         if (TextUtils.isEmpty(contactInfo.name)) {
-            return contactInfo.location;
+            //return contactInfo.location;
+            //return contactInfo.location;
+            return null;
         }
         return contactInfo.number;
     }
@@ -819,9 +825,9 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
     public interface CallCardUi extends Ui {
         void setVisible(boolean on);
         void setCallCardVisible(boolean visible);
-        void setPrimary(String number, String name, boolean nameIsNumber, String label,
+        void setPrimary(String number, String name, boolean nameIsNumber, String label, String location,
                 Drawable photo, boolean isSipCall, boolean isForwarded);
-        void setSecondary(boolean show, String name, boolean nameIsNumber, String label,
+        void setSecondary(boolean show, String name, boolean nameIsNumber, String label, String location,
                 String providerLabel, Drawable providerIcon, boolean isConference);
         void setCallState(int state, int videoState, int sessionModificationState,
                 DisconnectCause disconnectCause, String connectionLabel,
@@ -831,6 +837,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi>
         void setPrimaryImage(Drawable image);
         void setPrimaryPhoneNumber(String phoneNumber);
         void setPrimaryLabel(String label);
+        void setPrimaryLocation(String location);
         void setEndCallButtonEnabled(boolean enabled, boolean animate);
         void setCallbackNumber(String number, boolean isEmergencyCalls);
         void setPhotoVisible(boolean isVisible);

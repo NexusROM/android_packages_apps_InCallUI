@@ -420,17 +420,17 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
 
                     // Display a geographical description string if available
                     // (but only for incoming calls.)
-                    if (isIncoming) {
+                    //if (isIncoming) {
                         // TODO (CallerInfoAsyncQuery cleanup): Fix the CallerInfo
                         // query to only do the geoDescription lookup in the first
                         // place for incoming calls.
-                        displayLocation = info.geoDescription; // may be null
-                        Log.d(TAG, "Geodescrption: " + info.geoDescription);
-                    }
+                        //displayLocation = info.geoDescription; // may be null
+                        //Log.d(TAG, "Geodescrption: " + info.geoDescription);
+                    //}
 
-                    Log.d(TAG, "  ==>  no name; falling back to number:"
-                            + " displayNumber '" + Log.pii(displayNumber)
-                            + "', displayLocation '" + displayLocation + "'");
+                    //Log.d(TAG, "  ==>  no name; falling back to number:"
+                            //+ " displayNumber '" + Log.pii(displayNumber)
+                            //+ "', displayLocation '" + displayLocation + "'");
                 }
             } else {
                 // We do have a valid "name" in the CallerInfo. Display that
@@ -450,7 +450,7 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
                             + "', displayNumber '" + displayNumber + "'");
                 }
             }
-
+        displayLocation = info.geoDescription;
         cce.name = displayName;
         cce.number = displayNumber;
         cce.location = displayLocation;
